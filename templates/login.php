@@ -31,7 +31,7 @@ if ($_POST['email']&&$_POST['password']) {
 
 ?>
 <form method="POST">
-<div>E-mail:<input name="email" type="email"></div>
-<div>密码:<input name="password" type="password"></div>
+<div>E-mail:<input name="email" type="email" required></div>
+<div>密码:<input name="password" type="password" required></div>
 <input type="submit">
 </form>
