@@ -21,6 +21,24 @@ function view() {
 <div><input name="role" value="<?php echo $page['role'];?>" placeholder="职能（程序/美术/音乐/...）" required></div>
 <div><input name="contact" value="<?php echo $page['contact'];?>" placeholder="主要联系方式" required></div>
 <textarea name="page"><?php echo $page['page'] ?></textarea>
+<script>
+function upload() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = function(e) {
+        var formData = new FormData();
+        formData.append("file", e.target.files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.onprogress=function(event) {
+            $('uploadbutton').innerHTML=e.loaded/e.total*100+'%';
+        }
+        xhr.open('POST', '/upload');
+        xhr.send(formData);
+    };
+    input.click();
+}
+</script>
+<div><button id="uploadbutton" type="button" onclick="upload()">上传附件</button>支持jpg/png/gif/mp3，最多上传10个。大文件尽量传到外站，然后在个人介绍中插入URL。</div>
 <input type="submit">
 </form>
 <?php

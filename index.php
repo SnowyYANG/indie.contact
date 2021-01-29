@@ -23,7 +23,7 @@ if ($uid) $user = $mysqli->query("SELECT uid,name,email,url FROM users WHERE uid
 if ($url = $_REQUEST['q'])
 {
     if ($url[0]==='/') $url=substr($url,1);
-    if (in_array($url, ['login','settings'])) {
+    if (in_array($url, ['login','settings','upload'])) {
         $template=$url;
     }
     else if (substr($url,0,4)==='job/') {
