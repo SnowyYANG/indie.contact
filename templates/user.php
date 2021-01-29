@@ -27,10 +27,20 @@ function upload() {
     input.type = 'file';
     input.onchange = function(e) {
         var formData = new FormData();
-        formData.append("file", e.target.files[0]);
+        var file = e.target.files[0];
+        formData.append("file", file);
         var xhr = new XMLHttpRequest();
-        xhr.onprogress=function(event) {
-            $('uploadbutton').innerHTML=e.loaded/e.total*100+'%';
+        xhr.onprogress=function(e2) {
+            var contentLength;
+            if (e2.lengthComputable) {
+                contentLength = e2.total;
+            } else {
+                contentLength = file.size;
+            }
+            $('uploadbutton').innerHTML='上传文件'+e2.loaded/contentLength*100+'%';
+        }
+        xhr.onload = function(e3) {
+            $('uploadbutton').innerHTML='上传文件 100%';
         }
         xhr.open('POST', '/upload');
         xhr.send(formData);
