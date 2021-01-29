@@ -26,8 +26,8 @@ function view() {
 <?php
     }
     else {
+        if ($user['uid']===$page['uid']) echo "<a href=\"/settings\">账户设置</a> <a href=\"/?u=$user[uid]&a=edit\">编辑个人资料</a>";
         echo "<h2>$page[name]</h2>";
-        if ($user['uid']===$page['uid']) echo "<a href=\"/?u=$user[uid]&a=edit\" style=\"float:right\">编辑</a>";
         echo "<div>$page[role]</div>";
         echo "<div>主要联系方式：$page[contact]</div>";
         $page_html=$page['page'];

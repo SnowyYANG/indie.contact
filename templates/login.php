@@ -33,5 +33,6 @@ if ($_POST['email']&&$_POST['password']) {
 <form method="POST">
 <div>E-mail:<input name="email" type="email" required></div>
 <div>密码:<input name="password" type="password" required></div>
+<div>注册与忘记密码找管理员QQ368487858</div>
 <input type="submit">
 </form>

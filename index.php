@@ -18,13 +18,13 @@ if (!($uid=$_SESSION['uid'])) {
         }
     }
 }
-if ($uid) $user = $mysqli->query("SELECT uid,name,url FROM users WHERE uid='$uid'")->fetch_assoc();
+if ($uid) $user = $mysqli->query("SELECT uid,name,email,url FROM users WHERE uid='$uid'")->fetch_assoc();
 
 if ($url = $_REQUEST['q'])
 {
     if ($url[0]==='/') $url=substr($url,1);
-    if ($url === 'login') {
-        $template='login';
+    if (in_array($url, ['login','settings'])) {
+        $template=$url;
     }
     else if (substr($url,0,4)==='job/') {
         $template = 'job';
@@ -64,7 +64,8 @@ require 'templates/'.$template.'.php';
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $title;?></title>
-        <!--link href="/rfwiki/rfwiki.css" type="text/css" rel="stylesheet"/-->
+        <!--link href="/main.css" type="text/css" rel="stylesheet"/-->
+        <script src="/main.js"></script>
     </head>
     <body>
     <div style="border-bottom:1px solid;padding-bottom:0.5em"><a href="/">indie.contact</a><div style="float:right">
