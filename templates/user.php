@@ -30,7 +30,7 @@ function upload() {
         var file = e.target.files[0];
         formData.append("file", file);
         var xhr = new XMLHttpRequest();
-        xhr.onprogress=function(e2) {
+        xhr.upload.onprogress=function(e2) {
             var contentLength;
             if (e2.lengthComputable) {
                 contentLength = e2.total;
@@ -39,7 +39,7 @@ function upload() {
             }
             $('uploadbutton').innerHTML='上传文件'+e2.loaded/contentLength*100+'%';
         }
-        xhr.onload = function(e3) {
+        xhr.upload.onload = function(e3) {
             $('uploadbutton').innerHTML='上传文件 100%';
         }
         xhr.open('POST', '/upload');
