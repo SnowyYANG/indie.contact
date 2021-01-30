@@ -31,16 +31,10 @@ function upload() {
         formData.append("file", file);
         var xhr = new XMLHttpRequest();
         xhr.upload.onprogress=function(e2) {
-            var contentLength;
-            if (e2.lengthComputable) {
-                contentLength = e2.total;
-            } else {
-                contentLength = file.size;
-            }
-            $('uploadbutton').innerHTML='上传文件'+e2.loaded/contentLength*100+'%';
+            $('uploadbutton').innerHTML='正在上传'+e2.loaded/e2.total*100+'%';
         }
         xhr.upload.onload = function(e3) {
-            $('uploadbutton').innerHTML='上传文件 100%';
+            $('uploadbutton').innerHTML='上传附件';
         }
         xhr.open('POST', '/upload');
         xhr.send(formData);
