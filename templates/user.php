@@ -77,7 +77,7 @@ function upload() {
 <div><button id="uploadbutton" type="button" onclick="upload()">上传附件</button>最多上传10个文件，每个文件最大8M。大文件尽量传到外站，然后在个人介绍中插入URL。</div>
 <ul id="atts">
 <?php $result=$mysqli->query("SELECT * FROM attachments WHERE uid='$user[uid]' ORDER BY 'order'");
-while($a=$result->fetch_assoc()) echo '<li draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"><a href="'.$a['url'].'">'.$a['desc'].'</a></li>'; ?>
+while($a=$result->fetch_assoc()) echo '<li draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"><a draggable="false" href="'.$a['url'].'">'.$a['desc'].'</a></li>'; ?>
 </ul>
 <input type="submit">
 </form>
