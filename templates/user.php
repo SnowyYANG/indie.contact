@@ -92,6 +92,10 @@ while($a=$result->fetch_assoc()) echo '<li draggable="true" ondragstart="onDragS
         $page_html=preg_replace('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', '<a href="$0" target="_blank" title="$0">$0</a>', $page_html);
         $page_html=nl2br($page_html);
         echo "<div style=\"margin-top:1em\">$page_html</div>";
+        echo '<ul>';
+        $result=$mysqli->query("SELECT * FROM attachments WHERE uid='$user[uid]' ORDER BY 'order'");
+        while($a=$result->fetch_assoc()) echo "<li><a href=\"$a[url]\">$a[desc]</a></li>";
+        echo '</ul>';
         echo "<div style=\"color:grey\">上次更新：$page[utime]</div>";
     }
 }
