@@ -22,6 +22,27 @@ function view() {
 <div><input name="contact" value="<?php echo $page['contact'];?>" placeholder="主要联系方式" required></div>
 <textarea name="page"><?php echo $page['page'] ?></textarea>
 <script>
+var _el;
+function isBefore(el1, el2) {
+  if (el2.parentNode === el1.parentNode)
+    for (var cur = el1.previousSibling; cur && cur.nodeType !== 9; cur = cur.previousSibling)
+      if (cur === el2)
+        return true;
+  return false;
+}
+function onDragStart(e) {
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", null); // Thanks to bqlou for their comment.
+    _el = e.target;
+}
+function onDragOver(e) {
+    var target;
+    for (target = e.target;target.parentNode.id != 'atts';target = target.parentNode);
+    if (isBefore(_el, target))
+        target.parentNode.insertBefore(_el, target);
+    else
+        target.parentNode.insertBefore(_el, target.nextSibling);
+}
 function upload() {
     var input = document.createElement('input');
     input.type = 'file';
@@ -39,8 +60,11 @@ function upload() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 var node = document.createElement("li");
+                node.draggable=true;
+                node.ondragstart = onDragStart;
+                node.ondragover = onDragOver;
                 var url = JSON.parse(xhr.responseText).url;
-                node.innerHTML='<a href="'+url+'">'+url+'</a>';
+                node.innerHTML='<a draggable="false" href="'+url+'">'+url+'</a>';
                 $('atts').appendChild(node);
             }
         }
@@ -50,8 +74,11 @@ function upload() {
     input.click();
 }
 </script>
-<div><button id="uploadbutton" type="button" onclick="upload()">上传附件</button>最多上传10个文件。大文件尽量传到外站，然后在个人介绍中插入URL。</div>
-<ul id="atts"></ul>
+<div><button id="uploadbutton" type="button" onclick="upload()">上传附件</button>最多上传10个文件，每个文件最大8M。大文件尽量传到外站，然后在个人介绍中插入URL。</div>
+<ul id="atts">
+<?php $result=$mysqli->query("SELECT * FROM attachments WHERE uid='$user[uid]' ORDER BY 'order'");
+while($a=$result->fetch_assoc()) echo '<li draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"><a href="'.$a['url'].'">'.$a['desc'].'</a></li>'; ?>
+</ul>
 <input type="submit">
 </form>
 <?php
