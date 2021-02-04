@@ -36,13 +36,22 @@ function upload() {
         xhr.upload.onload = function(e3) {
             $('uploadbutton').innerHTML='上传附件';
         }
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                var node = document.createElement("li");
+                var url = JSON.parse(xhr.responseText).url;
+                node.innerHTML='<a href="'+url+'">'+url+'</a>';
+                $('atts').appendChild(node);
+            }
+        }
         xhr.open('POST', '/upload');
         xhr.send(formData);
     };
     input.click();
 }
 </script>
-<div><button id="uploadbutton" type="button" onclick="upload()">上传附件</button>支持jpg/png/gif/mp3，最多上传10个。大文件尽量传到外站，然后在个人介绍中插入URL。</div>
+<div><button id="uploadbutton" type="button" onclick="upload()">上传附件</button>最多上传10个文件。大文件尽量传到外站，然后在个人介绍中插入URL。</div>
+<ul id="atts"></ul>
 <input type="submit">
 </form>
 <?php
