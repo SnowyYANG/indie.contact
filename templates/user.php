@@ -19,6 +19,10 @@ function view() {
 <form method="POST">
 <div><input name="name" value="<?php echo $page['name'];?>" placeholder="昵称" required></div>
 <div><input name="role" value="<?php echo $page['role'];?>" placeholder="职能（程序/美术/音乐/...）" required></div>
+<div>搜索tag：
+<input type="checkbox" id="tag100" name="tag[]" value="100"><label for="tag100">策划</label>
+<input type="checkbox" id="tag101" name="tag[]" value="101"><label for="tag101">数值策划</label>
+</div>
 <div><input name="contact" value="<?php echo $page['contact'];?>" placeholder="主要联系方式" required></div>
 <textarea name="page"><?php echo $page['page'] ?></textarea>
 <script>

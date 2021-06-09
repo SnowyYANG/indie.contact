@@ -29,6 +29,7 @@ if ($_POST['email']&&$_POST['password']) {
     }
 }
 
+function view() {
 ?>
 <form method="POST">
 <div>E-mail:<input name="email" type="email" required></div>
@@ -36,3 +37,4 @@ if ($_POST['email']&&$_POST['password']) {
 <div>注册与忘记密码找管理员QQ368487858</div>
 <input type="submit">
 </form>
+<?php } ?>
