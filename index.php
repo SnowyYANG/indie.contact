@@ -19,7 +19,7 @@ session_start();
 if ($uid=$_SESSION['uid']) $user = $db->get('users',['uid','name','email','url'],['uid'=>$uid]);
 else if ($_COOKIE['uid']&&$_COOKIE['sessionkey']) {
     $user=$db->get('users',['uid','name','email','url','sessionkey'],['uid'=>$_COOKIE['uid']]);
-    if ($_COOKIE['sessionkey'] === $result['sessionkey']) $uid=$_SESSION['uid']=$user['uid'];
+    if ($_COOKIE['sessionkey'] === $user['sessionkey']) $uid=$_SESSION['uid']=$user['uid'];
     else $user=null;
 }
 $admin=$uid==='1';
