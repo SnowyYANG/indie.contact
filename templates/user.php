@@ -80,7 +80,7 @@ function upload() {
 </script>
 <div><button id="uploadbutton" type="button" onclick="upload()">上传附件</button>最多上传10个文件，每个文件最大8M。大文件尽量传到外站，然后在个人介绍中插入URL。</div>
 <ul id="atts">
-<?php $result=$mysqli->query("SELECT * FROM attachments WHERE uid='$user[uid]' ORDER BY 'order'");
+<?php $result=$mysqli->query("SELECT * FROM works WHERE uid='$user[uid]' ORDER BY 'order'");
 while($a=$result->fetch_assoc()) echo '<li draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"><a draggable="false" href="'.$a['url'].'">'.$a['desc'].'</a></li>'; ?>
 </ul>
 <input type="submit">
@@ -97,7 +97,7 @@ while($a=$result->fetch_assoc()) echo '<li draggable="true" ondragstart="onDragS
         $page_html=nl2br($page_html);
         echo "<div style=\"margin-top:1em\">$page_html</div>";
         echo '<ul>';
-        $result=$mysqli->query("SELECT * FROM attachments WHERE uid='$user[uid]' ORDER BY 'order'");
+        $result=$mysqli->query("SELECT * FROM works WHERE uid='$user[uid]' ORDER BY 'order'");
         while($a=$result->fetch_assoc()) echo "<li><a href=\"$a[url]\">$a[desc]</a></li>";
         echo '</ul>';
         echo "<div style=\"color:grey\">上次更新：$page[utime]</div>";
