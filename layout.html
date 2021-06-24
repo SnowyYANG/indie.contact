@@ -5,20 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% echo $title?$title.' - indie.contact':'indie.contact'; %}</title>
         <!--link href="/main.css" type="text/css" rel="stylesheet"/-->
-        <script src="/main.js"></script>
+        <script src="/myjs/main.js"></script>
     </head>
     <body>
-    <div style="border-bottom:1px solid;padding-bottom:0.5em">
-        <a href="/">indie.contact</a>
-        <div style="float:right">
-            {% if ($user): %}
-            <a href="{% echo user2url($user) %}">{{{$user['name']}}}</a>
-            {% else: %}
-            <a href="/login">登录/注册</a>
-            {% endif; %}
+        <div style="border-bottom:1px solid;padding-bottom:0.5em">
+            <a href="/">indie.contact</a>
+            <div style="float:right">
+                {% if ($user): %}
+                <a href="{% echo user2url($user) %}">{{{$user['name']}}}</a>
+                {% else: %}
+                <a href="/login">登录/注册</a>
+                {% endif; %}
+            </div>
         </div>
-    </div>
-    <div>{% yield content %}</div>
-<footer>indie.contact © 2021</footer>
-</body>
+        <div>{% yield content %}</div>
+        <footer>indie.contact © 2021</footer>
+    </body>
 </html>
