@@ -23,10 +23,11 @@ else if ($_COOKIE['uid']&&$_COOKIE['sessionkey']) {
     else $user=null;
 }
 
+$routers=['login','settings','upload','tags','users','jobs'];
 if ($url = $_REQUEST['q'])
 {
     if ($url[0]==='/') $url=substr($url,1);
-    if (in_array($url, ['login','settings','upload'])) $controller=$url;
+    if (in_array($url, $routers)) $controller=$url;
     else if (substr($url,0,4)==='job/'&&strlen($url)>4) {
         $controller='job';
         $jid=substr($url,4);

@@ -17,18 +17,18 @@ if ($_POST) {
         else $error['email']='无效的E-mail';
     }
     if ($user['url']!==$_POST['url']) {
-        if (!$_POST['url']) $_POST['url']=null;
-        $page['url']=$_POST['url'];
-        if (preg_match('/\A[a-z0-9_]*\z/',$_POST['url'])) {
-            if (!$_POST['url']) $_POST['url']=null;
-            if ($db->update('users',['url'=>$_POST['url'],['uid'=>$pageuid])->rowCount()) $success['url']=true;
+        $url=$page['url']=$_POST['url'];
+        if ($url===null||$url==='') $url=null; //$page['url'] in model should still be ''
+        if (!$url||in_array($url,$routers)) $error['url']='不能使用的保留词语';
+        else if (!preg_match('/\A[a-z0-9_]*\z/',$url)) $error['url']='无效的URL，URL只能包含数字、小写字母、下划线';
+        else {
+            if ($db->update('users',['url'=>$url],['uid'=>$pageuid])->rowCount()) $success['url']=true;
             else $error['url']='URL已占用';
         }
-        else $error['url']='无效的URL，URL只能包含数字、小写字母、下划线';
     }
-    if ($_POST['password0']&&$_POST['password']) {
-        if ($pageuser=$db->get('users',['password'],['uid'=>$pageuid])) {
-            if (password_verify($_POST['password0'],$pageuser['password'])) {
+    if (($uid==='1'||$_POST['password0'])&&$_POST['password']) {
+        if ($uid==='1'||($pageuser=$db->get('users',['password'],['uid'=>$pageuid]))) {
+            if ($uid==='1'||password_verify($_POST['password0'],$pageuser['password'])) {
                 if ($db->update('users',['password'=>password_hash($_POST['password'],PASSWORD_DEFAULT)],['uid'=>$pageuid])->rowCount()) $success['password']=true;
             }
             else $error['password0']='原密码错误';
@@ -41,6 +41,9 @@ if ($_POST) {
     }
 }
 
-if ($_SESSION['success']) $model['success']=$_SESSION['success'];
-$_SESSION['success']=null;
+if ($_SESSION['success']) {
+    $model['success']=$_SESSION['success'];
+    $_SESSION['success']=null;
+}
+$model['page']=$db->get('users',['uid','email','url'],['uid'=>$uid==='1'&&$_REQUEST['u']?$_REQUEST['u']:$uid]);
 $template='settings';
