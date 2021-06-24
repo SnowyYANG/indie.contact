@@ -1,11 +1,17 @@
 {% extends layout.html %}
 
 {% block content %}
-{% if ($user['uid']===$page['uid']): %}
+{% if ($admin||$user['uid']===$page['uid']): %}
     <a href="/settings">账户设置</a> <a href="/?u={{ $user['uid'] }}&a=edit">编辑个人资料</a>
 {% endif; %}
 <h2>{{{ $page['name'] }}}</h2>
 <div>{{{ $page['role'] }}}</div>
+<div>标签（<a href="/?u={{$page['uid']}}&a=edittags">编辑</a>）：
+    {% if (!$tags): %}无{% endif; %}
+    {% foreach($tags as $tag): %}
+    {{$tag['tagname']}}
+    {% endforeach; %}
+</div>
 <div>主要联系方式：{{{ $page['contact'] }}}</div>
 <div style="margin-top:1em">{{ $page['bio'] }}</div>
 <div style="margin-top:1em">主要作品：</div>

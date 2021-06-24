@@ -1,0 +1,12 @@
+{% extends layout.html %}
+
+{% block content %}
+<h2>{{{$page['name']}}} - 选择标签</h2>
+<form>
+    {% foreach($tags as $tag): %}
+    <input type="checkbox" id="tag{{ $tag['tagid'] }}" name="tag[]" value="{{ $tag['tagid'] }}"
+    {% if (in_array($tag['tagid'],$selection)): %} checked {% endif; %}>
+    <label for="tag{{ $tag['tagid'] }}">{{ $tag['tagname'] }}</label>
+    {% endforeach; %}
+</form>
+{% endblock %}
