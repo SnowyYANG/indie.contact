@@ -2,3 +2,4 @@ public/attachments
 config.php
 backup
 !backup/indie.conf
+cache

@@ -1,0 +1,7 @@
+{% extends layout.html %}
+
+{% block content %}
+<h2>{{{$job['title']}}}</h2>
+<div>by <a href="{% echo user2url($job) %}">{{$job['name']}}</a></div>
+{{$job['content']}}
+{% endblock %}

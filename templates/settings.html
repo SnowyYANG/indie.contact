@@ -1,0 +1,25 @@
+
+{% if ($success['email']): %}
+<div>E-mail修改成功。</div>
+{% endif; %}
+{% if ($success['url']): %}
+<div>URL修改成功。</div>
+{% endif; %}
+{% if ($success['password']): %}
+<div>密码修改成功。</div>
+{% endif; %}
+<form method="POST" onpost="return $('password1').value===document.forms[0].password.value">
+    <div>Email（不公开显示，用来登录与取回密码）:<input name="email" type="email" value="{{ $page['email'] }}">{{ $error['email'] }}</div>
+    <div>账户URL：https://indie.contact/<input name="url" placeholder="?u={{ $user['uid'] }}" value="{{ $page['url'] }}">{{ $error['url'] }}</div>
+    <div>修改密码时才填写以下3行：</div>
+    <div>原密码:<input name="password0" type="password">{{$error['password0']}}</div>
+    <div>新密码:<input name="password" type="password" oninput="p_oninput()"></div>
+    <div>确认新密码:<input id="password1" type="password" oninput="p_oninput()"><span id="notmatch" style="visibility:hidden">密码不匹配</span></div>
+    <button type="submit">保存</button>
+</form>
+<script>
+function p_oninput() {
+    $('notmatch').style.visibility=$('password1').value===document.forms[0].password.value?'hidden':'visible';
+}
+</script>
+    

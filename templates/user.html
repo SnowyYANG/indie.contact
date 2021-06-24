@@ -1,0 +1,18 @@
+{% extends layout.html %}
+
+{% block content %}
+{% if ($user['uid']===$page['uid']): %}
+    <a href="/settings">账户设置</a> <a href="/?u={{ $user['uid'] }}&a=edit">编辑个人资料</a>
+{% endif; %}
+<h2>{{{ $page['name'] }}}</h2>
+<div>{{{ $page['role'] }}}</div>
+<div>主要联系方式：{{{ $page['contact'] }}}</div>
+<div style="margin-top:1em">{{ $page['bio'] }}</div>
+<div style="margin-top:1em">主要作品：</div>
+<ul>
+    {% foreach($works as $work): %}
+    <li><a href="{{ $work['url'] }}">{{{ $work['desc'] }}}</a></li>
+    {% endforeach; %}
+</ul>
+<div style="color:grey">上次更新：{{ $page['utime'] }}</div>
+{% endblock %}
