@@ -5,7 +5,7 @@ if (!$user) {
     exit;
 }
 
-$pageuid=$uid==='1'&&$_REQUEST['u']?$_REQUEST['u']:$uid;
+$pageuid=$admin&&$_REQUEST['u']?$_REQUEST['u']:$uid;
 
 if ($_POST) {
     if ($_POST['email']&&$user['email']!==$_POST['email']) {
@@ -26,9 +26,9 @@ if ($_POST) {
             else $error['url']='URL已占用';
         }
     }
-    if (($uid==='1'||$_POST['password0'])&&$_POST['password']) {
-        if ($uid==='1'||($pageuser=$db->get('users',['password'],['uid'=>$pageuid]))) {
-            if ($uid==='1'||password_verify($_POST['password0'],$pageuser['password'])) {
+    if (($admin||$_POST['password0'])&&$_POST['password']) {
+        if ($admin||$pageuser=$db->get('users',['password'],['uid'=>$pageuid])) {
+            if ($admin||password_verify($_POST['password0'],$pageuser['password'])) {
                 if ($db->update('users',['password'=>password_hash($_POST['password'],PASSWORD_DEFAULT)],['uid'=>$pageuid])->rowCount()) $success['password']=true;
             }
             else $error['password0']='原密码错误';
@@ -45,5 +45,5 @@ if ($_SESSION['success']) {
     $model['success']=$_SESSION['success'];
     $_SESSION['success']=null;
 }
-$model['page']=$db->get('users',['uid','email','url'],['uid'=>$uid==='1'&&$_REQUEST['u']?$_REQUEST['u']:$uid]);
+$model['page']=$db->get('users',['uid','email','url'],['uid'=>$admin&&$_REQUEST['u']?$_REQUEST['u']:$uid]);
 $template='settings';

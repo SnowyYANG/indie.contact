@@ -6,7 +6,7 @@ if (!($model['page']=$pageuser)) {
     return;
 }
 $model['works']=$db->select('works','*',['uid'=>$pageuser['uid'],'ORDER'=>'order']);
-if ($_REQUEST['a']==='edit'&&($uid==='1'||$uid===$pageuser['uid'])) {
+if ($_REQUEST['a']==='edit'&&($admin||$uid===$pageuser['uid'])) {
     if ($_POST) {
         $result=$db->update('users',['name'=>$_POST['name'],'role'=>$_POST['role'],'contact'=>$_POST['contact'],'bio'=>$_POST['bio']],['uid'=>$uid]);
         if ($result->rowCount()) {

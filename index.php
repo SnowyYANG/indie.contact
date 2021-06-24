@@ -22,6 +22,7 @@ else if ($_COOKIE['uid']&&$_COOKIE['sessionkey']) {
     if ($_COOKIE['sessionkey'] === $result['sessionkey']) $uid=$_SESSION['uid']=$user['uid'];
     else $user=null;
 }
+$admin=$uid==='1';
 
 $routers=['login','settings','upload','tags','users','jobs'];
 if ($url = $_REQUEST['q'])
