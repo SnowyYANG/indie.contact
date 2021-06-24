@@ -28,7 +28,7 @@ else {
         }
         $template='user_edit';
     }
-    $template='user';
+    else $template='user';
     $model['tags']=$db->select('user_tags',['[><]tags'=>['tagid'=>'tagid']],['tagname']);
 }
 $model['title']=$page['name'];
