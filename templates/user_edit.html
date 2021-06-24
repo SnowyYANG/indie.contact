@@ -1,74 +1,23 @@
 {% extends layout.html %}
 
 {% block content %}
+<h2>资料编辑</h2>
 <form method="POST">
 <div><input name="name" value="{{{ $page['name'] }}}" placeholder="昵称" required></div>
 <div><input name="role" value="{{{ $page['role'] }}}" placeholder="职能（程序/美术/音乐/...）" required></div>
-<div>标签（<a href="/?u={{$page['uid']&a=edittags}}">编辑</a>）：
+<div>标签（<a href="/?u={{$page['uid']}}&a=edittags">编辑</a>）：
     {% if (!$tags): %}无{% endif; %}
     {% foreach($tags as $tag): %}
-    {{tag['tagname']}}
+    {{$tag['tagname']}}
     {% endforeach; %}
 </div>
 <div><input name="contact" value="{{{ $page['contact'] }}}" placeholder="主要联系方式"></div>
 <textarea name="bio">{{{ $page['bio'] }}}</textarea>
-<script>
-var _el;
-function isBefore(el1, el2) {
-    if (el2.parentNode === el1.parentNode)
-    for (var cur = el1.previousSibling; cur && cur.nodeType !== 9; cur = cur.previousSibling)
-        if (cur === el2)
-        return true;
-    return false;
-}
-function onDragStart(e) {
-    e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData("text/plain", null); // Thanks to bqlou for their comment.
-    _el = e.target;
-}
-function onDragOver(e) {
-    var target;
-    for (target = e.target;target.parentNode.id != 'works';target = target.parentNode);
-    if (isBefore(_el, target))
-        target.parentNode.insertBefore(_el, target);
-    else
-        target.parentNode.insertBefore(_el, target.nextSibling);
-}
-function upload() {
-    var input = document.createElement('input');
-    input.type = 'file';
-    input.onchange = function(e) {
-        var formData = new FormData();
-        var file = e.target.files[0];
-        formData.append("file", file);
-        var xhr = new XMLHttpRequest();
-        xhr.upload.onprogress=function(e2) {
-            $('uploadbutton').innerHTML='正在上传'+e2.loaded/e2.total*100+'%';
-        }
-        xhr.upload.onload = function(e3) {
-            $('uploadbutton').innerHTML='上传附件';
-        }
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-                var node = document.createElement("li");
-                node.draggable=true;
-                node.ondragstart = onDragStart;
-                node.ondragover = onDragOver;
-                var url = JSON.parse(xhr.responseText).url;
-                node.innerHTML='<a draggable="false" href="'+url+'">'+url+'</a>';
-                $('works').appendChild(node);
-            }
-        }
-        xhr.open('POST', '/upload');
-        xhr.send(formData);
-    };
-    input.click();
-}
-</script>
 <div><button type="submit">保存</button></div>
 </form>
 <div>
-    作品管理 <button id="uploadbutton" type="button" onclick="upload()">上传附件</button>最多上传10个文件，每个文件最大8M。大文件尽量传到外站，然后插入URL。
+    <h3>作品管理</h3>
+    <button id="uploadbutton" type="button">上传附件</button>最多上传10个文件，每个文件最大8M。大文件尽量传到外站，然后插入URL。
     <ul id="works">
         {% foreach($works as $work): %}
         <li draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)">
@@ -76,5 +25,6 @@ function upload() {
         </li>
         {% endforeach; %}
     </ul>
+    <script src="myjs/editworks.js"></script> 
 </div>
 {% endblock %}
