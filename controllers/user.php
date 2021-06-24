@@ -7,7 +7,7 @@ if (!($model['page']=$page)) {
     return;
 }
 $editable=$admin||$page['uid']===$uid;
-if ($editable&&$_REQUEST['a']==='edittags') {
+if ($editable&&$_GET['a']==='edittags') {
     $template='user_edittags';
     $model['tags']=$db->select('tags','*');
     $model['selection']=[];
