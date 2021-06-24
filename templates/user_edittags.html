@@ -2,6 +2,7 @@
 
 {% block content %}
 <h2>{{{$page['name']}}} - 选择标签</h2>
+<div>用Ctrl+F搜索关键字。</div>
 <form>
     {% foreach($tags as $tag): %}
     <input type="checkbox" id="tag{{ $tag['tagid'] }}" name="tag[]" value="{{ $tag['tagid'] }}"
