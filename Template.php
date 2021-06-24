@@ -3,7 +3,7 @@ class Template {
 
 	static $blocks = array();
 	static $cache_path = '../cache/';
-	static $cache_enabled = false;
+	static $cache_enabled = USE_CACHE;
 
 	static function view($file, $data = array()) {
 		$cached_file = self::cache($file);

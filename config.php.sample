@@ -1,0 +1,5 @@
+<?php
+const FILE_DIR = 'C:/Users/snowy/Desktop/indie.contact/public/attachments/';
+const MYSQL_USER = 'local';
+const MYSQL_PASSWORD = 'local';
+const USE_CACHE = false;
