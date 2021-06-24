@@ -1,0 +1,26 @@
+{% extends layout.html %}
+
+{% block content %}
+<h2>{{$title}}</h2>
+<form>
+    <input id="input_raw" style="display:none">
+    <div id="input_master" style="display:inline;border:1px solid grey">
+        <ul id="input_tags" style="display:inline;padding:0">
+            <input id="input_current" value="" style="border:none; outline:none;background:transparent"/>
+        </ul>
+    </div>
+    <button>搜索</button>
+</form>
+{% foreach($users as $u): %}
+<div><a href="{% echo user2url($u) %}">{{{$u['name']}}}</a> {{{$u['role']}}} {{{$u['contact']}}}</div>
+{% endforeach; %}
+<div>
+    {%if ($page>1):%}
+    <a href="/users?{% pagination($page-1) %}">上一页</a>
+    {%endif;%}
+    {{$page}}
+    {%if (count($users)==30):%}
+    <a href="/users?{% pagination($page+1) %}">下一页</a>
+    {%endif;%}
+</div>
+{% endblock %}

@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+require_once 'lib.php';
 require_once 'Medoo.php';
 include 'Template.php';
 
@@ -46,5 +47,6 @@ function user2url($row) {
 
 $model=['user'=>$user];
 require 'controllers/'.$controller.'.php';
+$model['title']=$title;
 if ($template) Template::view($template.'.html', $model);
 ?>

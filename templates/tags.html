@@ -4,7 +4,7 @@
 <h2>全部标签</h2>
 <ul>
     {% foreach($tags as $tag): %}
-    <li><a href="/tag/{{ $tag['tagurl']??$tag['tagid'] }}">{{ $tag['tagname'] }}</a> {{ $tag['tagdesc'] }}</li>
+    <li><a href="/users?tags[]={{ $tag['tagurl'] }}">{{ $tag['tagname'] }}</a> {{ $tag['tagdesc'] }}</li>
     {% endforeach; %}
 </ul>
 {% endblock %}
