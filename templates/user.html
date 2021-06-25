@@ -17,7 +17,7 @@
 <div style="margin-top:1em">主要作品：</div>
 <ul>
     {% foreach($works as $work): %}
-    <li><a href="{{ $work['url'] }}">{{{ $work['desc'] }}}</a></li>
+    <li><a href="{{ $work['url'] }}" target="indiefile">{{{ $work['desc'] }}}</a></li>
     {% endforeach; %}
 </ul>
 <div style="color:grey">上次更新：{{ $page['utime'] }}</div>

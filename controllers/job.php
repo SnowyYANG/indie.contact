@@ -6,4 +6,5 @@ if (!$job) {
 }
 $title=$job['title'];
 $model['job']=$job;
+$model['attachments']=$db->get('job_attachments','*',['jid'=>$jid]);
 $template='job';

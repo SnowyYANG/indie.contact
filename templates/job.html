@@ -4,4 +4,10 @@
 <h2>{{{$job['title']}}}</h2>
 <div>by <a href="{% echo user2url($job) %}">{{$job['name']}}</a></div>
 {{$job['content']}}
+{%if ($attachments):%}
+附件：
+<ul>
+    <ul><a href="{{$a['aurl']}}" target="indiefile">{{{$a['filename']}}}</a></ul>
+</ul>
+{%endif;%}
 {% endblock %}
