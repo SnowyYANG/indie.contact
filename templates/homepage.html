@@ -22,7 +22,7 @@
 </div>
 <div style="margin:1em">
     <div>
-        <h2>最新会员</h2> <a href="/users">全部会员</a>
+        <h2>新会员</h2> <a href="/users">全部会员</a>
     </div>
         {% foreach($users as $row): %}
         <div><a href="{% echo user2url($row) %}">{{{ $row['name'] }}}</a> {{{ $row['role'] }}}</div>
@@ -30,7 +30,7 @@
     </div>
 <div style="margin:1em">
 <div>
-    <h2>最新招募</h2> <a href="/job/new">发布招募</a> <a href="/jobs">全部招募</a>
+    <h2>新招募</h2> <a href="/job/new">发布招募</a> <a href="/jobs">全部招募</a>
 </div>
     {% foreach($jobs as $row): %}
     <a href="/job/{{ $row['jid'] }}"><div>{{{ $row['title'] }}}</div></a>
