@@ -33,7 +33,7 @@
     <h2>新招募</h2> <a href="/job/new">发布招募</a> <a href="/jobs">全部招募</a>
 </div>
     {% foreach($jobs as $row): %}
-    <a href="/job/{{ $row['jid'] }}"><div>{{{ $row['title'] }}}</div></a>
+    <a href="/job/{{ $row['jid'] }}"><div>{{{ $row['title'] }}}</div></a> by 作者 2021/06/25<!--只有电脑端才显示作者和日期-->
     {% endforeach; %}
 </div>
 {% endblock %}
