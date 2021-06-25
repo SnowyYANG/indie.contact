@@ -14,7 +14,7 @@
         {%$role0='tester'%}<input type="radio" name="role0" value="{{$role0}}" id="role0_{{$role0}}" {%if ($page['role0']===$role0) echo 'checked'; %}><label for="role0_{{$role0}}">测试</label>
         {%$role0='other'%}<input type="radio" name="role0" value="{{$role0}}" id="role0_{{$role0}}" {%if ($page['role0']===$role0) echo 'checked'; %}><label for="role0_{{$role0}}">其他</label>
     </div>
-    <div><input name="role" value="{{{ $page['role'] }}}" placeholder="一句话简介（Unity程序/像素美术/...）" required></div>
+    <div><input name="role" value="{{{ $page['role'] }}}" placeholder="一句话简介（Unity程序/像素美术/...）"></div>
     <div>标签（<a href="/?u={{$page['uid']}}&a=edittags">编辑</a>）：
         {% if (!$tags): %}无{% endif; %}
         {% foreach($tags as $tag): %}
