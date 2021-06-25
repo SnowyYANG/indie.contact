@@ -20,8 +20,7 @@ else {
     $model['works']=$db->select('works','*',['uid'=>$page['uid'],'ORDER'=>'order']);
     if ($editable&&$_REQUEST['a']==='edit') {
         if ($_POST) {
-            $result=$db->update('users',['name'=>$_POST['name'],'role'=>$_POST['role'],'contact'=>$_POST['contact'],'bio'=>$_POST['bio']],['uid'=>$uid]);
-            if ($result->rowCount()) {
+            if ($db->update('users',['name'=>$_POST['name'],'role'=>$_POST['role'],'contact'=>$_POST['contact'],'bio'=>$_POST['bio']],['uid'=>$uid])->rowCount()) {
                 header('Location: '.user2url($user));
                 exit;
             }

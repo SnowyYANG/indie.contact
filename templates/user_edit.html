@@ -17,7 +17,7 @@
 </form>
 <div>
     <h3>作品管理</h3>
-    <button id="uploadbutton" type="button">上传附件</button>最多上传10个文件，每个文件最大8M。大文件尽量传到外站，然后插入URL。
+    <button id="uploadbutton" type="button">上传作品</button>最多上传30个文件，所有文件最大30M。大文件可以传到外站，然后插入URL。
     <ul id="works">
         {% foreach($works as $work): %}
         <li draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)">

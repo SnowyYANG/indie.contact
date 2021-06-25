@@ -1,0 +1,19 @@
+{% extends layout.html %}
+
+{% block content %}
+<h2>{{$title}}</h2>
+<form>
+    <input name="title" value="{{{$job['title']}}}" placeholder="标题">
+    <textarea name="content" placeholder="内容">{{{$job['content']}}}</textarea>
+    附件：<button id="uploadbutton" type="button">上传附件</button>
+    <ul>
+        {% foreach($attachments as $a): %}
+        <li draggable="true">
+            <a draggable="false" href="{{ $a['aurl'] }}">{{{ $a['filename'] }}}</a>
+            <a href="#">重命名</a> <a href="#">删除</a>
+        </li>
+        {% endforeach; %}
+    </ul>
+    <button>{% echo $jid?'发布':'保存' %}</button>
+</form>
+{% endblock %}
