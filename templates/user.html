@@ -2,9 +2,10 @@
 
 {% block content %}
 {% if ($admin||$user['uid']===$page['uid']): %}
-    <a href="/settings">账户设置</a> <a href="/?u={{ $user['uid'] }}&a=edit">编辑个人资料</a>
+<a href="/settings">账户设置</a> <a href="/?u={{ $user['uid'] }}&a=edit">编辑个人资料</a>
 {% endif; %}
 <h2>{{{ $page['name'] }}}</h2>
+<div style="color:grey">更新时间：{{ $page['utime'] }} <a href="#" title="更新个人资料时间，个人资料显示在会员列表前排。">刷新资料</a></div>
 <div>{{{ $page['role'] }}}</div>
 <div>标签（<a href="/?u={{$page['uid']}}&a=edittags">编辑</a>）：
     {% if (!$tags): %}无{% endif; %}
@@ -12,13 +13,15 @@
     {{$tag['tagname']}}
     {% endforeach; %}
 </div>
-<div>主要联系方式：{{{ $page['contact'] }}}</div>
-<div style="margin-top:1em">{{ $page['bio'] }}</div>
+<div>联系方式：<br>
+    <div><b>{% echo content2html($page['contact']) %}</b></div>
+    {{$page['contact2_html']}}
+</div>
+<div style="margin-top:1em">{{ $page['bio_html'] }}</div>
 <div style="margin-top:1em">主要作品：</div>
 <ul>
     {% foreach($works as $work): %}
     <li><a href="{{ $work['url'] }}" target="indiefile">{{{ $work['desc'] }}}</a></li>
     {% endforeach; %}
 </ul>
-<div style="color:grey">上次更新：{{ $page['utime'] }}</div>
 {% endblock %}
