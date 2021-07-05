@@ -25,15 +25,15 @@
         <h2>新会员</h2> <a href="/users">全部会员</a>
     </div>
         {% foreach($users as $row): %}
-        <div><a href="{% echo user2url($row) %}">{{{ $row['name'] }}}</a> {{{ $row['role'] }}}</div>
+        <div><a href="{% echo user2url($row) %}">{{{ $row['name'] }}}</a> <img class="role0" src="/imgs/role0/{{$row['role0']}}.svg">{{{ $row['role'] }}} {{{$row['contact']}}}</div>
         {% endforeach; %}
     </div>
 <div style="margin:1em">
 <div>
-    <h2>新招募</h2> <a href="/job/new">发布招募</a> <a href="/jobs">全部招募</a>
+    <h2>新招募</h2> <a href="/job/new">+发布招募</a> <a href="/jobs">全部招募</a>
 </div>
     {% foreach($jobs as $row): %}
-    <a href="/job/{{ $row['jid'] }}"><div>{{{ $row['title'] }}}</div></a> by 作者 2021/06/25<!--只有电脑端才显示作者和日期-->
+    <a href="/job/{{ $row['jid'] }}"><div>{{{ $row['title'] }}}</a> by <a href="{%echo user2url($row)%}">{{{$row['name']}}}</a> {{$row['jtime']}}</div>
     {% endforeach; %}
 </div>
 {% endblock %}
