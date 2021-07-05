@@ -1,8 +1,8 @@
 {% extends layout.html %}
 
 {% block content %}
-<div>在indie.contact找找独立游戏策划、美术、程序、音乐、文案、测试人的联系方式吧。你也可以发布组队招募的消息。</div>
-<div style="margin:1em">
+<div class="content-group">在<a href="/">indie.contact</a>找找独立游戏策划、美术、程序、音乐、文案、测试人的联系方式吧。你也可以发布组队招募的消息。</div>
+<div class="content-group">
     <div style="font-weight:bold">标签搜索</div>
     <form>
         <input id="input_raw" style="display:none">
@@ -20,7 +20,7 @@
         <a href="/tags">所有标签→</a>
     </div>
 </div>
-<div style="margin:1em">
+<div class="content-group">
     <div>
         <h2>新会员</h2> <a href="/users">全部会员</a>
     </div>
@@ -28,10 +28,10 @@
         <div><a href="{% echo user2url($row) %}">{{{ $row['name'] }}}</a> <img class="role0" src="/imgs/role0/{{$row['role0']}}.svg">{{{ $row['role'] }}} {{{$row['contact']}}}</div>
         {% endforeach; %}
     </div>
-<div style="margin:1em">
-<div>
-    <h2>新招募</h2> <a href="/job/new">+发布招募</a> <a href="/jobs">全部招募</a>
-</div>
+<div class="content-group">
+    <div>
+        <h2>新招募</h2> <a href="/job/new">+发布招募</a> <a href="/jobs">全部招募</a>
+    </div>
     {% foreach($jobs as $row): %}
     <a href="/job/{{ $row['jid'] }}"><div>{{{ $row['title'] }}}</a> by <a href="{%echo user2url($row)%}">{{{$row['name']}}}</a> {{$row['jtime']}}</div>
     {% endforeach; %}

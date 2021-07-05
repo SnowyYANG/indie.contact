@@ -1,3 +1,39 @@
+body {
+    margin:0;
+    padding:0;
+    background-color: black;
+}
+main {
+    background-color: white;
+}
+.header {
+    margin:0.5rem;
+}
+.header a {
+    color:white
+}
+.logo {
+    vertical-align: middle;
+}
+h1 {
+    display:inline-block;
+    vertical-align: middle;
+    margin:0.5rem;
+    font-size:24px;
+    line-height:1em;
+}
+.account {
+    float:right;
+    margin:0.7rem;
+}
+footer {
+    color:grey;
+    text-align: center;
+    padding: 0.5rem;
+}
+.content-group {
+    padding:1rem;
+}
 .role0 {
     height:16px;
     width:16px;

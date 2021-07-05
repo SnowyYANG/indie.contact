@@ -8,9 +8,9 @@
         <script src="/myjs/main.js"></script>
     </head>
     <body>
-        <div style="border-bottom:1px solid;padding-bottom:0.5em">
-            <a href="/">indie.contact</a>
-            <div style="float:right">
+        <div class="header">
+            <a class="title" href="/"><img class="logo" src="/imgs/logo.svg"><h1>indie.contact</h1></a>
+            <div class="account">
                 {% if ($user): %}
                 <a href="{% echo user2url($user) %}">{{{$user['name']}}}</a>
                 {% else: %}
@@ -18,7 +18,7 @@
                 {% endif; %}
             </div>
         </div>
-        <div>{% yield content %}</div>
+        <main>{% yield content %}</main>
         <footer>indie.contact © 2021</footer>
     </body>
 </html>
