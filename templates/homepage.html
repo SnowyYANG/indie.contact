@@ -1,39 +1,67 @@
 {% extends layout.html %}
 
 {% block content %}
-<div class="content-group">在<a href="/">indie.contact</a>找找独立游戏策划、美术、程序、音乐、文案、测试人的联系方式吧。你也可以发布组队招募的消息。</div>
-<div class="content-group">
-    <div style="font-weight:bold">标签搜索</div>
-    <form>
-        <input id="input_raw" style="display:none">
-        <div id="input_master" style="display:inline;border:1px solid grey">
-            <ul id="input_tags" style="display:inline;padding:0">
-                <input id="input_current" value="" style="border:none; outline:none;background:transparent"/>
-            </ul>
+<div class="group-content">在<a href="/">indie.contact</a>找找独立游戏策划、美术、程序、音乐、文案、测试人的联系方式吧。你也可以发布组队招募的帖子。</div>
+<div>
+    <div class="group-header"><h2>标签搜索</h2></div>
+    <div class="group-content">
+        <form>
+            <input id="input_raw" style="display:none">
+            <div id="input_master" style="display:inline;border:1px solid grey">
+                <ul id="input_tags" style="display:inline;padding:0">
+                    <input id="input_current" value="" style="border:none; outline:none;background:transparent"/>
+                </ul>
+            </div>
+            <button>搜索</button>
+        </form>
+        <div>热门标签：
+            {%foreach($hottags as $tag):%}
+            <a href="/users?tags[]={{ $tag['tagurl'] }}">{{$tag['tagname']}}</a>
+            {%endforeach;%}
+            <a href="/tags">所有标签→</a>
         </div>
-        <button>搜索</button>
-    </form>
-    <div>热门标签：
-        {%foreach($hottags as $tag):%}
-        <a href="/users?tags[]={{ $tag['tagurl'] }}">{{$tag['tagname']}}</a>
-        {%endforeach;%}
-        <a href="/tags">所有标签→</a>
     </div>
 </div>
-<div class="content-group">
-    <div>
-        <h2>新会员</h2> <a href="/users">全部会员</a>
+<div>
+    <div class="group-header">
+        <h2>新会员</h2>
+        <a class="group-header-right" href="/users">全部会员</a>
     </div>
-        {% foreach($users as $row): %}
-        <div><a href="{% echo user2url($row) %}">{{{ $row['name'] }}}</a> <img class="role0" src="/imgs/role0/{{$row['role0']}}.svg">{{{ $row['role'] }}} {{{$row['contact']}}}</div>
+    <div class="group-content">
+        <table class="user-list">
+            {% foreach($users as $row): %}
+            <tr>
+                <td class="user-list-name">
+                    <a href="{% echo user2url($row) %}">
+                        <div class="avatar-small">
+                            <img src="{{$row['avatar']}}">
+                        </div><span class="avatar-name"></span>{{{ $row['name'] }}}
+                    </a>
+                </td>
+                <td class="user-list-role" title="【{%echo role02text($row['role0'])%}】{{{$row['role']}}}">
+                    <img class="role0" src="/imgs/role0/{{$row['role0']}}.svg"> {{{ $row['role'] }}}
+                </td>
+                <td>{{{$row['contact']}}}</td>
+            </tr>
+            {% endforeach; %}
+        </table>
+    </div>
+</div>
+<div>
+    <div class="group-header">
+        <h2>新招募</h2> <a href="/job/new">+发布招募</a>
+        <a class="group-header-right" href="/jobs">全部招募</a>
+    </div>
+    <div class="group-content">
+        {% foreach($jobs as $row): %}
+        <div>
+            <a href="/job/{{ $row['jid'] }}">{{{ $row['title'] }}}</a>
+            <span class="mobile-hide">
+                by <a href="{%echo user2url($row)%}">{{{$row['name']}}}</a>
+                {{$row['jtime']}}
+            </span>
+        </div>
         {% endforeach; %}
     </div>
-<div class="content-group">
-    <div>
-        <h2>新招募</h2> <a href="/job/new">+发布招募</a> <a href="/jobs">全部招募</a>
-    </div>
-    {% foreach($jobs as $row): %}
-    <a href="/job/{{ $row['jid'] }}"><div>{{{ $row['title'] }}}</a> by <a href="{%echo user2url($row)%}">{{{$row['name']}}}</a> {{$row['jtime']}}</div>
-    {% endforeach; %}
 </div>
 {% endblock %}

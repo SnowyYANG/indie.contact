@@ -44,6 +44,9 @@ else  $controller='homepage';
 function user2url($row) {
     return '/'.($row['url']??"?u=$row[uid]");
 }
+function role02text($role0) {
+    return ['other'=>'其他','designer'=>'策划','programmer'=>'程序','writer'=>'文案','artist'=>'美术','musician'=>'音乐/音效/配音','tester'=>'测试'][$role0];
+}
 $model=['user'=>$user];
 require 'controllers/'.$controller.'.php';
 $model['title']=$title;
