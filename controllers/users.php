@@ -1,7 +1,7 @@
 <?php
 $page=$_GET['page'];
 if ($page<1) $page=1;
-$where=['ORDER'=>['utime'=>'DESC'],'LIMIT'=>[($page-1)*30,30]];
+$where=['ORDER'=>['utime'=>'DESC'],'LIMIT'=>[($page-1)*50,50]];
 if ($_GET['tags']) {
     $model['tags']=$db->select('tags',['tagid','tagurl','tagname']);
     $title='搜索用户';

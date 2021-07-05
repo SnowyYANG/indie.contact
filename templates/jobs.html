@@ -1,0 +1,17 @@
+{% extends layout.html %}
+
+{% block content %}
+<h2>全部招募</h2>
+{% foreach($jobs as $j): %}
+<div><a href="/job/{{$j['jid']}}">{{{$j['title']}}}</a> by <a href="{%echo user2url($j)%}">{{{$j['name']}}}</a> ({{$j['jtime']}})</div>
+{% endforeach; %}
+<div>
+    {%if ($page>1):%}
+    <a href="/jobs?{% pagination($page-1) %}">上一页</a>
+    {%endif;%}
+    {{$page}}
+    {%if (count($jobs)==50):%}
+    <a href="/job?{% pagination($page+1) %}">下一页</a>
+    {%endif;%}
+</div>
+{% endblock %}

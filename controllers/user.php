@@ -32,4 +32,4 @@ else {
     else $template='user';
     $model['tags']=$db->select('user_tags',['[><]tags'=>['tagid'=>'tagid']],['tagname']);
 }
-$model['title']=$page['name'];
+$title=$page['name'];

@@ -19,7 +19,7 @@
     <a href="/users?{% pagination($page-1) %}">上一页</a>
     {%endif;%}
     {{$page}}
-    {%if (count($users)==30):%}
+    {%if (count($users)==50):%}
     <a href="/users?{% pagination($page+1) %}">下一页</a>
     {%endif;%}
 </div>
