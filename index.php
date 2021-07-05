@@ -44,7 +44,6 @@ else  $controller='homepage';
 function user2url($row) {
     return '/'.($row['url']??"?u=$row[uid]");
 }
-
 $model=['user'=>$user];
 require 'controllers/'.$controller.'.php';
 $model['title']=$title;

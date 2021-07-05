@@ -1,4 +1,4 @@
-public/attachments
+public/uploads
 config.php
 backup/*
 !backup/indie.conf

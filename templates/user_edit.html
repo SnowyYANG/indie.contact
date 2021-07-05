@@ -4,8 +4,12 @@
 <h2>资料编辑</h2>
 <form method="POST">
     <div><input name="name" value="{{{ $page['name'] }}}" placeholder="昵称" required></div>
+    <div style="width: 128px;height: 128px;line-height: 128px;text-align: center;">
+        <img id="avatar" src="{{ $page['avatar'] }}" style="max-width:100%;max-height:100%;vertical-align: middle; margin: 0 auto;" alt="头像">
+    </div>
+    <button id="uploadAvatar" type="button">上传头像</button>
+    <script src="/myjs/avatar.js"></script>
     <div>
-        {%$role0='maker'%}<input type="radio" name="role0" value="{{$role0}}" id="role0_{{$role0}}" {%if ($page['role0']===$role0) echo 'checked'; %}><label for="role0_{{$role0}}">制作人</label>
         {%$role0='designer'%}<input type="radio" name="role0" value="{{$role0}}" id="role0_{{$role0}}" {%if ($page['role0']===$role0) echo 'checked'; %}><label for="role0_{{$role0}}">策划</label>
         {%$role0='programmer'%}<input type="radio" name="role0" value="{{$role0}}" id="role0_{{$role0}}" {%if ($page['role0']===$role0) echo 'checked'; %}><label for="role0_{{$role0}}">程序</label>
         {%$role0='writer'%}<input type="radio" name="role0" value="{{$role0}}" id="role0_{{$role0}}" {%if ($page['role0']===$role0) echo 'checked'; %}><label for="role0_{{$role0}}">文案</label>
